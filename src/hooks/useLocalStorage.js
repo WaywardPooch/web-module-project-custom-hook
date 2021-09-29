@@ -11,6 +11,10 @@ const useLocalStorage = (key, initialValue) => {
     // If item exists, use it, otherwise use initialValue
     return item ? JSON.parse(item) : initialValue;
   };
+  const setValue = (value) => {
+    setStoredValue(value);
+    window.localStorage.setItem(key, JSON.stringify(value));
+  };
 
   // ========== STATES
   const [storedValue, setStoredValue] = useState(
@@ -18,7 +22,7 @@ const useLocalStorage = (key, initialValue) => {
   );
 
   // ========== OUTPUT
-  return storedValue;
+  return [storedValue, setValue];
 };
 
 // ========== EXPORT
